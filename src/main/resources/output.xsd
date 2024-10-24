@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified"
+           elementFormDefault="qualified">
+    <xs:element name="document">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="1" minOccurs="1" name="header" type="Header"/>
+                <xs:element maxOccurs="unbounded" minOccurs="1" name="transactions" type="TransactionDetail"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="Header">
+        <xs:sequence>
+            <xs:element maxOccurs="1" minOccurs="1" name="date" type="xs:date"/>
+            <xs:element maxOccurs="1" minOccurs="1" name="numberOfTransactions" type="xs:int"/>
+            <xs:element maxOccurs="1" minOccurs="1" name="fileId" type="xs:string"/>
+            <xs:element maxOccurs="1" minOccurs="1" name="transactionSummary" type="TransactionSummary"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TransactionSummary">
+        <xs:sequence>
+            <xs:element maxOccurs="1" minOccurs="1" name="creditSummary" type="Summary"/>
+            <xs:element maxOccurs="1" minOccurs="1" name="debitSummary" type="Summary"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TransactionDetail">
+        <xs:sequence>
+            <xs:element maxOccurs="1" minOccurs="1" name="accountNumber" type="xs:string"/>
+            <xs:element maxOccurs="1" minOccurs="1" name="debit" type="AmountAndCurrency"/>
+            <xs:element maxOccurs="1" minOccurs="1" name="credit" type="AmountAndCurrency"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Summary">
+        <xs:sequence>
+            <xs:element maxOccurs="1" minOccurs="1" name="numberOfTransactions" type="xs:nonNegativeInteger"/>
+            <xs:element maxOccurs="1" minOccurs="1" name="totalAmount" type="AmountAndCurrency"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="AmountAndCurrency">
+        <xs:simpleContent>
+            <xs:extension base="xs:decimal">
+                <xs:attribute name="currency" type="xs:string" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+</xs:schema>
