@@ -112,7 +112,7 @@ public class TransactionService {
   }
 
   private String createFileId(LocalDate date) {
-    return "transactions-%s-%s.xml".formatted(date.format(DATE_FORMAT_YYMMDD),
+    return "transactions-%s-%s".formatted(date.format(DATE_FORMAT_YYMMDD),
         UUID.randomUUID());
   }
 
